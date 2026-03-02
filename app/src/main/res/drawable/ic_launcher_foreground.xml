@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+    <!-- Mirror icon -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M34,34h15v40H34V34z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M59,34h15v40H59V34z" />
+    <!-- Connection indicator -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,44 C58,44 58,64 54,64"
+        android:strokeWidth="3"
+        android:strokeColor="#000000" />
+</vector>

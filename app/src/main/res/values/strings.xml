@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PalmaMirror</string>
+
+    <!-- Connection States -->
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_scanning">Scanning for iPhone…</string>
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_discovering">Discovering services…</string>
+    <string name="status_subscribing">Subscribing to notifications…</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_reconnecting">Reconnecting…</string>
+
+    <!-- Home Screen -->
+    <string name="home_title">Notifications</string>
+    <string name="home_empty">No notifications yet.\nWaiting for iPhone…</string>
+    <string name="home_disconnected">iPhone disconnected.\nReconnecting…</string>
+    <string name="home_clear_all">Clear All</string>
+
+    <!-- Call Screen -->
+    <string name="call_incoming">Incoming Call</string>
+    <string name="call_accept">Accept</string>
+    <string name="call_reject">Reject</string>
+    <string name="call_unknown">Unknown Caller</string>
+
+    <!-- Notification Detail -->
+    <string name="detail_reply">Reply</string>
+    <string name="detail_dismiss">Dismiss</string>
+    <string name="detail_no_content">No message content</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_connection">Connection</string>
+    <string name="settings_reconnect">Reconnect</string>
+    <string name="settings_unpair">Unpair Device</string>
+    <string name="settings_notifications">Notification Filters</string>
+    <string name="settings_canned_replies">Quick Replies</string>
+    <string name="settings_font_size">Font Size</string>
+    <string name="settings_font_small">Small</string>
+    <string name="settings_font_medium">Medium</string>
+    <string name="settings_font_large">Large</string>
+    <string name="settings_font_xlarge">Extra Large</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="settings_battery_optimization">Battery Optimization</string>
+    <string name="settings_battery_optimization_desc">Disable battery optimization to keep the Bluetooth connection alive</string>
+
+    <!-- Setup Wizard -->
+    <string name="setup_welcome">Welcome to PalmaMirror</string>
+    <string name="setup_welcome_desc">Mirror your iPhone notifications on your Boox Palma 2</string>
+    <string name="setup_permissions">Permissions Required</string>
+    <string name="setup_permissions_desc">PalmaMirror needs Bluetooth and location permissions to connect to your iPhone</string>
+    <string name="setup_grant_permissions">Grant Permissions</string>
+    <string name="setup_pair">Pair with iPhone</string>
+    <string name="setup_pair_desc">Open Bluetooth settings on your iPhone and look for \"PalmaMirror\"</string>
+    <string name="setup_start_pairing">Start Pairing</string>
+    <string name="setup_done">All Set!</string>
+    <string name="setup_done_desc">Your iPhone notifications will now appear here</string>
+    <string name="setup_finish">Get Started</string>
+    <string name="setup_next">Next</string>
+    <string name="setup_skip">Skip</string>
+
+    <!-- Notification Categories -->
+    <string name="category_other">Other</string>
+    <string name="category_incoming_call">Incoming Call</string>
+    <string name="category_missed_call">Missed Call</string>
+    <string name="category_voicemail">Voicemail</string>
+    <string name="category_social">Social</string>
+    <string name="category_schedule">Schedule</string>
+    <string name="category_email">Email</string>
+    <string name="category_news">News</string>
+    <string name="category_health">Health &amp; Fitness</string>
+    <string name="category_business">Business &amp; Finance</string>
+    <string name="category_location">Location</string>
+    <string name="category_entertainment">Entertainment</string>
+
+    <!-- Foreground Service -->
+    <string name="notification_channel_name">PalmaMirror Connection</string>
+    <string name="notification_channel_desc">Shows connection status with your iPhone</string>
+    <string name="notification_connected">Connected to iPhone</string>
+    <string name="notification_connecting">Connecting to iPhone…</string>
+    <string name="notification_disconnected">Disconnected from iPhone</string>
+
+    <!-- Errors -->
+    <string name="error_bluetooth_off">Bluetooth is turned off. Please enable Bluetooth to continue.</string>
+    <string name="error_permissions_denied">Bluetooth permissions are required for PalmaMirror to work.</string>
+    <string name="error_no_ble">This device does not support Bluetooth Low Energy.</string>
+    <string name="error_bond_lost">iPhone bond lost. Please re-pair in Bluetooth settings.</string>
+    <string name="error_service_not_found">Could not find notification service on iPhone. Make sure the iPhone is unlocked and nearby.</string>
+
+    <!-- Time groupings -->
+    <string name="time_today">Today</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_earlier">Earlier</string>
+
+    <!-- Canned Replies (defaults) -->
+    <string name="reply_on_my_way">On my way</string>
+    <string name="reply_be_right_there">Be right there</string>
+    <string name="reply_cant_talk">Can\'t talk right now</string>
+    <string name="reply_call_you_back">I\'ll call you back</string>
+    <string name="reply_ok">OK</string>
+    <string name="reply_thanks">Thanks</string>
+</resources>

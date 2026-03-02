@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen edge padding -->
+    <dimen name="screen_padding">16dp</dimen>
+
+    <!-- Card dimensions -->
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_spacing">8dp</dimen>
+    <dimen name="card_border_width">2dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+
+    <!-- Section spacing -->
+    <dimen name="section_gap">24dp</dimen>
+
+    <!-- Touch targets -->
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="call_button_height">80dp</dimen>
+
+    <!-- Icon sizes -->
+    <dimen name="icon_size">32dp</dimen>
+    <dimen name="category_icon_size">24dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="text_header">24sp</dimen>
+    <dimen name="text_body">18sp</dimen>
+    <dimen name="text_caption">14sp</dimen>
+    <dimen name="text_call_name">48sp</dimen>
+    <dimen name="text_call_number">24sp</dimen>
+    <dimen name="text_call_button">48sp</dimen>
+
+    <!-- Divider -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="border_width">2dp</dimen>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Simple mirror/reflection icon: two overlapping rectangles -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M4,4h7v16H4V4z M4,4h7v16H4V4z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M13,4h7v16h-7V4z" />
+    <!-- BLE signal arcs -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,8 C14,8 14,16 12,16"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFFFFF" />
+</vector>
