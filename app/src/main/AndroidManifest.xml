@@ -71,6 +71,11 @@
             android:exported="false"
             android:theme="@style/Theme.PalmaMirror" />
 
+        <activity
+            android:name=".ui.setup.SetupWizardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PalmaMirror" />
+
         <!-- BLE Foreground Service -->
         <service
             android:name=".service.MirrorForegroundService"

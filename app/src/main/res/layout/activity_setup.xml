@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:gravity="center">
+
+    <!-- Step indicator -->
+    <TextView
+        android:id="@+id/stepIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_caption"
+        android:textColor="#000000"
+        android:padding="@dimen/screen_padding" />
+
+    <!-- Icon area -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/setupTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_header"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:paddingStart="@dimen/section_gap"
+        android:paddingEnd="@dimen/section_gap" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/setupDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_body"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:paddingStart="@dimen/section_gap"
+        android:paddingEnd="@dimen/section_gap"
+        android:paddingTop="@dimen/screen_padding" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Action button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSetupAction"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_target_min"
+        android:layout_marginStart="@dimen/section_gap"
+        android:layout_marginEnd="@dimen/section_gap"
+        android:layout_marginBottom="@dimen/screen_padding"
+        style="@style/Widget.PalmaMirror.Button.Primary"
+        android:textAllCaps="false" />
+
+    <!-- Skip button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSetupSkip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_target_min"
+        android:layout_marginStart="@dimen/section_gap"
+        android:layout_marginEnd="@dimen/section_gap"
+        android:layout_marginBottom="@dimen/section_gap"
+        style="@style/Widget.PalmaMirror.Button.Secondary"
+        android:text="@string/setup_skip"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
+</LinearLayout>
