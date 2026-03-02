@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/card_spacing"
+    style="@style/Widget.PalmaMirror.Card"
+    app:cardElevation="0dp"
+    app:strokeColor="#000000"
+    app:strokeWidth="@dimen/card_border_width"
+    app:cardCornerRadius="@dimen/card_corner_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+        <!-- Header: Category indicator + App name + Timestamp -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Category indicator -->
+            <TextView
+                android:id="@+id/categoryIndicator"
+                android:layout_width="@dimen/category_icon_size"
+                android:layout_height="@dimen/category_icon_size"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:background="@drawable/category_badge_bg" />
+
+            <!-- App name -->
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:textSize="@dimen/text_caption"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Timestamp -->
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="@dimen/text_caption"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/notificationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/text_body"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <!-- Message preview -->
+        <TextView
+            android:id="@+id/messagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:maxLines="3"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

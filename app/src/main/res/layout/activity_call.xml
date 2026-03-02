@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Caller name -->
+    <TextView
+        android:id="@+id/callerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_call_name"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:paddingStart="@dimen/screen_padding"
+        android:paddingEnd="@dimen/screen_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/callerNumber"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <!-- Phone number -->
+    <TextView
+        android:id="@+id/callerNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_call_number"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:paddingTop="8dp"
+        android:paddingStart="@dimen/screen_padding"
+        android:paddingEnd="@dimen/screen_padding"
+        app:layout_constraintTop_toBottomOf="@id/callerName"
+        app:layout_constraintBottom_toTopOf="@id/callLabel" />
+
+    <!-- "Incoming Call" label -->
+    <TextView
+        android:id="@+id/callLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/call_incoming"
+        android:textSize="@dimen/text_body"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:paddingTop="@dimen/section_gap"
+        app:layout_constraintTop_toBottomOf="@id/callerNumber"
+        app:layout_constraintBottom_toTopOf="@id/buttonContainer" />
+
+    <!-- Button container -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/call_button_height"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Accept button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAccept"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/call_accept"
+            style="@style/Widget.PalmaMirror.Button.CallAccept"
+            android:textAllCaps="false" />
+
+        <!-- Reject button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReject"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/call_reject"
+            style="@style/Widget.PalmaMirror.Button.CallReject"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

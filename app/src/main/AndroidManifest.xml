@@ -53,6 +53,24 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.call.IncomingCallActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:theme="@style/Theme.PalmaMirror" />
+
+        <activity
+            android:name=".ui.detail.NotificationDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PalmaMirror" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PalmaMirror" />
+
         <!-- BLE Foreground Service -->
         <service
             android:name=".service.MirrorForegroundService"

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- Top bar with back -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_target_min"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#000000"
+        android:paddingStart="@dimen/screen_padding"
+        android:paddingEnd="@dimen/screen_padding">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_body"
+            android:minWidth="@dimen/touch_target_min"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:id="@+id/detailAppName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_body"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/detailTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_caption"
+            android:paddingStart="16dp" />
+    </LinearLayout>
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/screen_padding">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/detailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_header"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/detailSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/text_body"
+                android:textColor="#000000"
+                android:visibility="gone" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/screen_padding"
+                android:layout_marginBottom="@dimen/screen_padding"
+                android:background="#000000" />
+
+            <!-- Full message body -->
+            <TextView
+                android:id="@+id/detailMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_body"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif"
+                android:lineSpacingMultiplier="1.3"
+                android:text="@string/detail_no_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Action buttons -->
+    <LinearLayout
+        android:id="@+id/actionButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/screen_padding">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDismiss"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/touch_target_min"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="@string/detail_dismiss"
+            style="@style/Widget.PalmaMirror.Button.Secondary"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReply"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/touch_target_min"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:text="@string/detail_reply"
+            style="@style/Widget.PalmaMirror.Button.Primary"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
