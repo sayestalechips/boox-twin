@@ -29,6 +29,9 @@ class MirrorForegroundService : Service(), BleConnectionManager.ConnectionListen
     companion object {
         private const val TAG = "MirrorForegroundService"
         private const val NOTIFICATION_ID = 1
+        @Volatile
+        var instance: MirrorForegroundService? = null
+            private set
     }
 
     private lateinit var connectionManager: BleConnectionManager
@@ -38,8 +41,13 @@ class MirrorForegroundService : Service(), BleConnectionManager.ConnectionListen
     private val attributeParser = AncsAttributeParser()
     val repository = NotificationRepository()
 
+    fun getConnectionState(): BleConnectionManager.ConnectionState {
+        return connectionManager.connectionState.value
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
         Log.d(TAG, "Service created")
 
         connectionManager = BleConnectionManager(this, this)
@@ -70,6 +78,7 @@ class MirrorForegroundService : Service(), BleConnectionManager.ConnectionListen
 
     override fun onDestroy() {
         Log.d(TAG, "Service destroyed")
+        instance = null
         reconnector.stop()
         connectionManager.disconnect()
         super.onDestroy()

@@ -227,10 +227,13 @@ class BleConnectionManager(
     @SuppressLint("MissingPermission")
     fun getBondedIPhones(): List<BluetoothDevice> {
         val adapter = bluetoothAdapter ?: return emptyList()
-        return adapter.bondedDevices
-            ?.filter { it.type == BluetoothDevice.DEVICE_TYPE_LE || it.type == BluetoothDevice.DEVICE_TYPE_DUAL }
-            ?.toList()
-            ?: emptyList()
+        val allBonded = adapter.bondedDevices?.toList() ?: emptyList()
+        Log.d(TAG, "Bonded devices: ${allBonded.size}")
+        for (device in allBonded) {
+            Log.d(TAG, "  Device: ${device.name ?: "unnamed"} [${device.address}] type=${device.type}")
+        }
+        // Return ALL bonded devices — iPhones can show as any type depending on pairing method
+        return allBonded
     }
 
     private fun updateState(newState: ConnectionState) {
