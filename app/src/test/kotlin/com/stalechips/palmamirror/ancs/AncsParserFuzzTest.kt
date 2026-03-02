@@ -364,31 +364,22 @@ class AncsParserFuzzTest {
     @Test
     fun `AncsAttributeParser handles command ID 0 with truncated AppIdentifier`() {
         attributeParser.reset()
-        // AppIdentifier (attr ID 0) is null-terminated with no length prefix.
-        // Send header + attr ID 0 + some chars but no null terminator.
+        // AppIdentifier uses standard tuple format: attr ID + uint16 length + data.
+        // Send header + attr ID 0 + length (4) but only 2 bytes of data.
         val buffer = ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN)
         buffer.put(AncsConstants.COMMAND_ID_GET_NOTIFICATION_ATTRIBUTES)
         buffer.putInt(55)
         buffer.put(AncsConstants.NOTIFICATION_ATTR_APP_IDENTIFIER)
+        buffer.putShort(4) // claims 4 bytes of data
         buffer.put('c'.code.toByte())
         buffer.put('o'.code.toByte())
-        buffer.put('m'.code.toByte())
-        buffer.put('.'.code.toByte())
-        // No null terminator — parser should read to end of buffer
+        // Only 2 of 4 promised bytes — incomplete
 
         try {
             val result = attributeParser.feedData(buffer.array())
-            // Parser may or may not produce a result — depends on implementation.
+            // Parser should return null — data is incomplete (IncompleteParsing).
             // The key assertion is that it does not crash.
-            // Since there is no null terminator, the while loop will consume all remaining bytes.
-            // The parser's tryParse should succeed (no IncompleteParsing thrown).
-            if (result != null) {
-                assertEquals(55, result.notificationUID)
-                // AppIdentifier should contain "com." (read until end of buffer, no null found)
-                val appId = result.attributes[AncsConstants.NOTIFICATION_ATTR_APP_IDENTIFIER]
-                assertNotNull("AppIdentifier should be present", appId)
-                assertEquals("com.", appId)
-            }
+            assertNull("Truncated attribute data should not produce a result", result)
         } catch (e: Exception) {
             fail("feedData threw on truncated AppIdentifier: ${e.message}")
         }

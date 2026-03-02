@@ -13,7 +13,6 @@ import java.nio.ByteOrder
  *   Byte 0: CommandID (0 = GetNotificationAttributes)
  *   Bytes 1-4: NotificationUID (uint32 LE)
  *   Then repeating: AttributeID (1 byte) + AttributeLength (uint16 LE) + AttributeData (variable)
- *   Exception: AppIdentifier has no length prefix — it's null-terminated.
  */
 class AncsAttributeParser {
 
@@ -131,26 +130,17 @@ class AncsAttributeParser {
         while (buffer.hasRemaining()) {
             val attrId = buffer.get()
 
-            if (attrId == AncsConstants.NOTIFICATION_ATTR_APP_IDENTIFIER) {
-                // AppIdentifier is null-terminated (no length prefix)
-                val sb = StringBuilder()
-                while (buffer.hasRemaining()) {
-                    val b = buffer.get()
-                    if (b == 0.toByte()) break
-                    sb.append(b.toInt().toChar())
-                }
-                attributes[attrId] = sb.toString()
-            } else {
-                // Other attributes have uint16 LE length prefix
-                if (buffer.remaining() < 2) throw IncompleteParsing()
-                val length = buffer.getShort().toInt() and 0xFFFF
+            // All attributes in GetNotificationAttributes response use the
+            // standard tuple format: AttributeID + uint16 Length + Value.
+            // (Null-terminated AppIdentifier only appears in GetAppAttributes responses.)
+            if (buffer.remaining() < 2) throw IncompleteParsing()
+            val length = buffer.getShort().toInt() and 0xFFFF
 
-                if (buffer.remaining() < length) throw IncompleteParsing()
+            if (buffer.remaining() < length) throw IncompleteParsing()
 
-                val valueBytes = ByteArray(length)
-                buffer.get(valueBytes)
-                attributes[attrId] = String(valueBytes, Charsets.UTF_8)
-            }
+            val valueBytes = ByteArray(length)
+            buffer.get(valueBytes)
+            attributes[attrId] = String(valueBytes, Charsets.UTF_8)
         }
 
         Log.d(TAG, "Parsed ${attributes.size} attributes for UID=$uid")

@@ -60,7 +60,7 @@ class FullFlowTest {
     /**
      * Build a Data Source response with notification attributes.
      * Format: CommandID(1) + UID(4) + [AttrID(1) + Length(2) + Data(variable)]*
-     * AppIdentifier uses null-terminated format instead of length-prefixed.
+     * All attributes use the standard tuple format (AttrID + uint16 Length + Data).
      */
     private fun buildDsResponse(
         uid: Int,
@@ -77,12 +77,13 @@ class FullFlowTest {
         header.putInt(uid)
         parts.add(header.array())
 
-        // AppIdentifier (null-terminated, no length prefix)
+        // AppIdentifier (standard tuple: AttrID + uint16 Length + Data)
         if (appIdentifier != null) {
-            val appData = ByteBuffer.allocate(1 + appIdentifier.length + 1)
+            val appIdBytes = appIdentifier.toByteArray(Charsets.UTF_8)
+            val appData = ByteBuffer.allocate(1 + 2 + appIdBytes.size).order(ByteOrder.LITTLE_ENDIAN)
             appData.put(AncsConstants.NOTIFICATION_ATTR_APP_IDENTIFIER)
-            appData.put(appIdentifier.toByteArray(Charsets.UTF_8))
-            appData.put(0.toByte()) // null terminator
+            appData.putShort(appIdBytes.size.toShort())
+            appData.put(appIdBytes)
             parts.add(appData.array())
         }
 

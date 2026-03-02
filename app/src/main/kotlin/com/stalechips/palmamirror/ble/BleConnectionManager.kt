@@ -7,6 +7,7 @@ import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.util.concurrent.ConcurrentLinkedQueue
 
 /**
  * Manages BLE connection lifecycle to an iPhone for ANCS.
@@ -43,6 +44,11 @@ class BleConnectionManager(
 
     private var bluetoothGatt: BluetoothGatt? = null
     private var targetDevice: BluetoothDevice? = null
+
+    // GATT write queue — Android BLE only allows one pending write at a time
+    private val writeQueue = ConcurrentLinkedQueue<ByteArray>()
+    @Volatile
+    private var writeInProgress = false
 
     private val bluetoothManager: BluetoothManager =
         context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
@@ -117,6 +123,16 @@ class BleConnectionManager(
         ) {
             val value = characteristic.value ?: return
             onCharacteristicChanged(gatt, characteristic, value)
+        }
+
+        override fun onCharacteristicWrite(
+            gatt: BluetoothGatt,
+            characteristic: BluetoothGattCharacteristic,
+            status: Int
+        ) {
+            Log.d(TAG, "onCharacteristicWrite: ${characteristic.uuid}, status=$status")
+            writeInProgress = false
+            processNextWrite()
         }
 
         override fun onDescriptorWrite(
@@ -203,21 +219,42 @@ class BleConnectionManager(
     @SuppressLint("MissingPermission")
     fun disconnect() {
         Log.d(TAG, "Disconnecting")
+        writeQueue.clear()
+        writeInProgress = false
         bluetoothGatt?.disconnect()
         bluetoothGatt?.close()
         bluetoothGatt = null
         updateState(ConnectionState.DISCONNECTED)
     }
 
-    @SuppressLint("MissingPermission")
+    /**
+     * Queue a write to the ANCS Control Point. Writes are serialized
+     * so only one GATT write is in flight at a time.
+     */
     fun writeControlPoint(data: ByteArray): Boolean {
-        val gatt = bluetoothGatt ?: return false
-        val service = gatt.getService(AncsConstants.ANCS_SERVICE_UUID) ?: return false
-        val controlPoint = service.getCharacteristic(AncsConstants.CONTROL_POINT_UUID) ?: return false
+        if (bluetoothGatt == null) return false
+        writeQueue.add(data)
+        processNextWrite()
+        return true
+    }
 
+    @SuppressLint("MissingPermission")
+    private fun processNextWrite() {
+        if (writeInProgress) return
+        val data = writeQueue.poll() ?: return
+        val gatt = bluetoothGatt ?: return
+        val service = gatt.getService(AncsConstants.ANCS_SERVICE_UUID) ?: return
+        val controlPoint = service.getCharacteristic(AncsConstants.CONTROL_POINT_UUID) ?: return
+
+        writeInProgress = true
         controlPoint.value = data
         controlPoint.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
-        return gatt.writeCharacteristic(controlPoint)
+        val success = gatt.writeCharacteristic(controlPoint)
+        if (!success) {
+            Log.w(TAG, "writeCharacteristic failed, retrying next in queue")
+            writeInProgress = false
+            processNextWrite()
+        }
     }
 
     fun getConnectedGatt(): BluetoothGatt? = bluetoothGatt

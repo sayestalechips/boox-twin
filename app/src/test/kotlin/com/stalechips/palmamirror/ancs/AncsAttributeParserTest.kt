@@ -29,7 +29,7 @@ class AncsAttributeParserTest {
         val messageBytes = message.toByteArray(Charsets.UTF_8)
 
         val size = 5 + // CommandID + UID
-                1 + appIdBytes.size + 1 + // AppIdentifier (attr + data + null)
+                1 + 2 + appIdBytes.size + // AppIdentifier (attr + len + data)
                 1 + 2 + titleBytes.size + // Title (attr + len + data)
                 1 + 2 + subtitleBytes.size + // Subtitle
                 1 + 2 + messageBytes.size // Message
@@ -38,10 +38,10 @@ class AncsAttributeParserTest {
         buffer.put(AncsConstants.COMMAND_ID_GET_NOTIFICATION_ATTRIBUTES)
         buffer.putInt(uid)
 
-        // AppIdentifier (null-terminated, no length prefix)
+        // AppIdentifier (standard tuple: attr + uint16 length + data)
         buffer.put(AncsConstants.NOTIFICATION_ATTR_APP_IDENTIFIER)
+        buffer.putShort(appIdBytes.size.toShort())
         buffer.put(appIdBytes)
-        buffer.put(0.toByte())
 
         // Title
         buffer.put(AncsConstants.NOTIFICATION_ATTR_TITLE)
